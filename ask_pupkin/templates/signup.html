@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Signup{% endblock %}
+                                                                                                    
+{% block content %}
+<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Registration</legend>
+        {% if form.non_field_errors %}
+            <div class="control-group alert">{{ form.non_field_errors }}</div>
+        {% endif %}
+        {% for field in form %}
+            <div class="control-group">
+                <label class="control-label" for="inputLogin">{{ field.label }}</label>
+                <div class="controls">{{ field }}</div>
+            </div>
+            {% if field.errors %}
+                <div class="controls alert">{{ field.errors }}</div>
+            {% endif %}
+        {% endfor %}
+        <div class="form-action">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Registrate</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}

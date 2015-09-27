@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Answer{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li><h3><a href="">{{ question.title }}</a></h3></li>
+</ul>
+<div class="question row-fluid">
+    <div class="span3 imglike">
+        <img src="{{ question.author.profile.avatar_url.url }}" class="img-rounded">
+        <div>
+            <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
+        </div>
+        <div class="btn-group pull-left offset3">
+            <button class="btn btn-small">-</button>
+            <button class="btn btn-small" disabled>{{ question.author.profile.rating }}</button>
+            <button class="btn btn-small">+</button>
+        </div>
+    </div>
+    <div class="span8">
+        <h4><a href="">{{ question.title }}</a></h4>
+        <p>{{ question.text }}</p>
+        <div>
+            Tags: <a href="#">{{ question.tags }}</a>
+            <div class="row-fluid">
+                <p class="muted text-right">{{ question.date_added.ctime }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="nav nav-tabs">
+    <li><h3>Answers</h3></li>
+</ul>
+
+{% for answer in answers %}
+<div class="question row-fluid">
+    <div class="span3 imglike">
+        <img src="{{ answer.author.profile.avatar_url.url }}" class="img-rounded">
+        <div>
+            <p class="text-center"><a href="#">{{ answer.author.username }}</a></p>
+        </div>
+        <div class="btn-group pull-left offset3">
+            <button class="btn btn-small">-</button>
+            <button class="btn btn-small" disabled>{{ answer.author.profile.rating }}</button>
+            <button class="btn btn-small">+</button>
+        </div>
+    </div>
+    <div class="span8">
+        <br><p>{{ answer.text }}</p>
+        <div class="row-fluid">
+            <p class="muted text-right">{{ answer.date_added.ctime }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="pagination">
+    <ul>
+        {% if answers.has_previous %}
+        <li><a href="?id_q={{ question.id }}&page={{ answers.previous_page_number }}">Prev</a></li>
+        {% else %} 
+        <li class="disabled"><a href="#">Prev</a></li>
+        {% endif %}
+        {% if answers.has_next %}
+        <li><a href="?id_q={{ question.id }}&page={{ answers.next_page_number }}">Next</a></li>
+        {% else %}
+        <li class="disabled"><a href="#">Next</a></li>
+        {% endif %}         
+    </ul>
+</div>
+
+<form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Your answer</legend>
+        <div class="control-group">
+            <textarea rows="10" cols="10" name="text"></textarea>
+        </div>
+        <div class="form-action">
+            <div class="control-group">
+                <button type="submit" class="btn btn-primary">Answer</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+{% endblock %}

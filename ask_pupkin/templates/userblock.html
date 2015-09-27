@@ -1,0 +1,16 @@
+{% if user.is_authenticated %}
+    <ul class="nav pull-right">
+        <div class="span1">
+            <img src="" class="img-rounded">
+        </div>
+        <div class="span2">
+            {{ user.username }}<br>
+            <a href="#">Settings</a> <a href="{% url 'django.contrib.auth.views.logout' %}?next={{ request.path }}">Log out</a>
+        </div>
+    </ul>  
+{% else %}
+    <ul class="nav pull-right">
+        <li><a href="{% url 'django.contrib.auth.views.login' %}?next={{ request.path }}">Log in</a></li>
+        <li><a href="{% url 'asking.views.signup' %}?next={{ request.path }}">Register</a></li>
+    </ul>
+{% endif %}

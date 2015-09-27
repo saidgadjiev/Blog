@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Ask{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" enctype="multipart/form-data" method="post" action="">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Question</legend>
+        {% for field in form %}
+            <div class="control-group">
+                <label class="control-label" for="inputLogin">{{ field.label }}</label>
+                <div class="controls">{{ field }}</div>
+            </div>
+        {% endfor %}
+        <div class="form-action">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Ask!</button>
+            </div>
+        </div>
+   </fieldset>
+</form>
+{% endblock %}

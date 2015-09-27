@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+{% if not isBest %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="/">New</a></li>
+    <li><a href="index/best/">Best</a></li>
+</ul>
+{% else %}
+<ul class="nav nav-tabs">
+    <li><a href="/">New</a></li>
+    <li class="active"><a href="">Best</a></li>
+</ul>
+{% endif %}
+{% for question in questions %}
+<div class="question row-fluid">
+    <div class="span3 imglike">
+        <img src="{{ question.author.profile.avatar_url.url }}" class="img-rounded">
+        <div>
+            <p class="text-center"><a href="#">{{ question.author.username }}</a></p>
+        </div>
+        <div class="btn-group pull-left offset3">
+            <button class="btn btn-small js_dislike" data-id="{{ question.author.id }}">-</button>
+            <button class="btn btn-small js_cnt" disabled>{{ question.author.profile.rating }}</button>
+            <button class="btn btn-small js_like" data-id="{{ question.author.id }}">+</button>
+        </div>
+    </div>
+    <div class="span8">
+        <h4><a href="../../answer/?id_q={{ question.id }}">{{ question.title }}</a></h4>
+        <p>{{ question.text }}</p>
+        <div>
+            <a href="../../answer/?id_q={{ question.id }}">answer <span class="badge">{{ question.answer_set.count }}</span></a>
+            Tags: <a href="">{{ question.tags }}</a>
+            <div class="row-fluid">
+                <p class="muted text-right">{{ question.date_added.ctime }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="pagination">
+    <ul>
+        {% if questions.has_previous %}
+            <li><a href="?page={{ questions.previous_page_number }}">Prev</a></li>
+         {% else %} 
+            <li class="disabled"><a href="#">Prev</a></li>
+        {% endif %}
+        {% if questions.has_next %}
+            <li><a href="?page={{ questions.next_page_number }}">Next</a></li>
+        {% else %}
+            <li class="disabled"><a href="#">Next</a></li>
+        {% endif %}         
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        nginx/1.4.6
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /helloworld.wsgi
+Document Length:        16 bytes
+
+Concurrency Level:      1
+Time taken for tests:   22.610 seconds
+Complete requests:      100000
+Failed requests:        0
+Total transferred:      20400000 bytes
+HTML transferred:       1600000 bytes
+Requests per second:    4422.84 [#/sec] (mean)
+Time per request:       0.226 [ms] (mean)
+Time per request:       0.226 [ms] (mean, across all concurrent requests)
+Transfer rate:          881.11 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       0
+Processing:     0    0   0.1      0      42
+Waiting:        0    0   0.1      0      42
+Total:          0    0   0.1      0      42
+
+Percentage of the requests served within a certain time (ms)
+  50%      0
+  66%      0
+  75%      0
+  80%      0
+  90%      0
+  95%      0
+  98%      0
+  99%      0
+ 100%     42 (longest request)
